@@ -84,11 +84,6 @@ erDiagram
 4. Clique no botão **Authorize** (ícone de cadeado no canto superior direito do Swagger).
 5. Cole apenas o token no campo **Value**, clique em **Authorize** e depois em **Close**.
 
-### Capturas de Tela da Documentação
-> Adicione suas capturas de tela na pasta `docs/` do repositório e referencie abaixo:
-> * `![Swagger Visão Geral](docs/swagger-overview.png)`
-> * `![Autenticação JWT no Swagger](docs/swagger-auth.png)`
-
 ## Principais Endpoints da API
 
 * **`POST /api/auth/register`** (`Anônimo`): Registra novo usuário no Identity com papel `Student` e cria o perfil em `Estudantes`.
