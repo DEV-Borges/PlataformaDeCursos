@@ -1,6 +1,55 @@
-@PlataformaDeCursos_HostAddress = http://localhost:5079
+@baseUrl = https://localhost:7280
+@token = COLE_AQUI_O_ACCESS_TOKEN_GERADO_NO_LOGIN
 
-GET {{PlataformaDeCursos_HostAddress}}/weatherforecast/
+### 1. Login como Admin (Copie o accessToken retornado para a variável @token acima)
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@plataforma.com",
+  "senha": "Admin@123!"
+}
+
+### 2. Registrar um novo Estudante
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "nomeCompleto": "Bruno Borges",
+  "email": "bruno.aluno@plataforma.com",
+  "senha": "Aluno@123!"
+}
+
+### 3. Criar um Curso (Requer Role: Admin ou Instructor)
+POST {{baseUrl}}/api/Cursos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "titulo": "Desenvolvimento Web com ASP.NET Core 8",
+  "descricao": "Construindo APIs seguras com Entity Framework Core, MySQL e Identity.",
+  "categoria": "Programação",
+  "cargaHoraria": 60
+}
+
+### 4. Listar Cursos (Público - com filtro e paginação)
+GET {{baseUrl}}/api/Cursos?pagina=1&tamanhoPagina=10&categoria=Programa%C3%A7%C3%A3o&ordenarPor=titulo
 Accept: application/json
 
-###
+### 5. Consultar Meu Perfil de Estudante (Requer Autenticação)
+GET {{baseUrl}}/api/Estudantes/me
+Authorization: Bearer {{token}}
+
+### 6. Realizar Matrícula (Admin informando estudanteId ou Aluno usando apenas o token)
+POST {{baseUrl}}/api/Inscricoes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "cursoId": 1,
+  "estudanteId": 1
+}
+
+### 7. Listar Matrículas de um Estudante
+GET {{baseUrl}}/api/estudantes/1/inscricoes?pagina=1&tamanhoPagina=10&status=1
+Authorization: Bearer {{token}}
